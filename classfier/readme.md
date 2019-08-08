@@ -6,7 +6,7 @@ and it output model and vectorizer as picklefile and output score of each metirc
 
 
 ## text and target 
-text input as list of ward
+text input as list of ward  
 target is [1,1,-1......]
 
 ## vecotrize={"tfidf","count","LSA"}
