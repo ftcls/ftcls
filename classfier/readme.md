@@ -1,4 +1,4 @@
-#classifer_training(text,target,way_of_vectorize="tfidf",down_sample=True,way_of_split="skf",metrics="ac")
+# classifer_training(text,target,way_of_vectorize="tfidf",down_sample=True,way_of_split="skf",metrics="ac")
 
 it use Bayesian Optimization　for hyperparameter turnig each svm machine,random forest, logistic reguration
 and it output model and vectorizer as picklefile and output score of each metircs as csvfile
