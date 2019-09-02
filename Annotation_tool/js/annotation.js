@@ -41,13 +41,14 @@ function readAsText(){
         var total_q=$("ul.question-item li").index()+1;//总数据
         var current_page=5;//每页显示的数据
         var current_num=1;//当前页数
-        var total_page= Math.round(total_q/current_page);//总页数  
+        var total_page= Math.ceil(total_q/current_page);//总页数  
         var next=$(".next");//下一页
         var prev=$(".prev");//上一页
         $(".total").text(total_page);//显示总页数
         $(".current_page").text(current_num);//当前的页数
         //下一页
         $(".next_page").click(function(){
+            var current_num = $(".current_page").text();
             if(current_num==total_page){
                 return false;//如果大于总页数就禁用下一页
             }
@@ -66,6 +67,9 @@ function readAsText(){
         });
             //上一页方法
         $(".prev_page").click(function(){
+            var current_num = $(".current_page").text();
+        //alert(current_num);
+        //var current_num = $(".current_page").text(parseInt(current_num)-1).text();
             if(current_num==1){
                 return false;
             }else{
@@ -154,7 +158,7 @@ function uploadCanceled(evt) {
         answersIteratorIndex;
         superContainer.addClass('main-quiz-holder');
         for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
-            contentFob += '<div class="slide-container" id="item'+questionsIteratorIndex+'"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div "class="question">' + config.questions[questionsIteratorIndex].question + '</div><ul class="answers">';
+            contentFob += '<div class="slide-container" id="item'+questionsIteratorIndex+'"><div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div><div class="question">' + config.questions[questionsIteratorIndex].question + '</div><ul class="answers">';
             for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
                 contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex] + '</li>';
             }
@@ -206,17 +210,22 @@ function uploadCanceled(evt) {
         notice.hide();
         slidesList.hide().first().fadeIn(500);
         color=[];
-        superContainer.find('li').click(function() {
+        superContainer.find('.answers li').click(function() {
             
             var thisLi = $(this);
             var number = thisLi.parents('.answers').parents('.slide-container').index();
             if (thisLi.hasClass('selected')) {
                 thisLi.removeClass('selected');
-
+                //thisLi.removeClass('label1');
+                //thisLi.removeClass('label2');
+                $('#question'+(number-2)).removeClass("label1");
+                $('#question'+(number-2)).removeClass("label2");
             } else {
                 thisLi.parents('.answers').children('li').removeClass('selected');
                 thisLi.addClass('selected');
                 if($(this).index()==0){
+                    //thisLi.next().removeClass('label2');
+                    //thisLi.addClass('label1');
                     //$('#question'+(number-2)).css('background','#fc5e5e');
                     $('#question'+(number-2)).addClass('label1');
                     $('#question'+(number-2)).removeClass("label2");
@@ -225,6 +234,8 @@ function uploadCanceled(evt) {
                     $('#question'+(number-2)+' .label').removeClass("label_2");}
                 else if($(this).index()==1){
                     //$('#question'+(number-2)).css('background','#c3e462');
+                    //thisLi.prev().removeClass('label1');
+                    //thisLi.addClass('label2');
                     $('#question'+(number-2)).addClass('label2');
                     $('#question'+(number-2)).removeClass("label1");
                     $('#question'+(number-2)+' .label').html("Label__2,");
@@ -236,6 +247,8 @@ function uploadCanceled(evt) {
 
         superContainer.find('.nav-start button').click(function() {
             $('#upload').fadeOut(500);
+            $('body').css('background-color','#f3f3f3');
+            document.getElementById('left-item').style.height=$(window).height()+'px';
             $(this).parents('.slide-container').fadeOut(500,
             function() {
                 $(this).prev().fadeIn(500);
@@ -252,6 +265,7 @@ function uploadCanceled(evt) {
         });
 
         superContainer.find('.next').click(function() {
+        	
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
                 notice.fadeIn(300);
                 return false;
@@ -260,6 +274,18 @@ function uploadCanceled(evt) {
             $(this).parents('.slide-container').fadeOut(500,
             function() {
                 $(this).next().fadeIn(500);
+                var current_page =5;
+                var current_num = $(".current_page").text();
+                if($(this).index()==(current_page*current_num+1)){
+                	$(".current_page").html(parseInt(current_num)+1);
+	                $.each($('ul.question-item li'),function(index,item){
+	                    if(index >= (current_page*current_num) && index < (current_page*current_num+5)){//如果索引值是在start和end之间的元素就显示，否则就隐
+                            $(this).show();
+                        }else{
+                            $(this).hide(); 
+                        }
+                    });
+                }//alert($(this).index());
             });
             progress.animate({
                 width: progress.width() + Math.round(progressWidth / questionLength)
@@ -268,10 +294,26 @@ function uploadCanceled(evt) {
             return false;
         });
         superContainer.find('.prev').click(function() {
+
+        	
             notice.hide();
             $(this).parents('.slide-container').fadeOut(500,
             function() {
                 $(this).prev().fadeIn(500);
+                var current_page =5;
+                var current_num = $(".current_page").text();
+
+                if($(this).index()-2==(current_page*current_num-5)){
+                	$(".current_page").html(parseInt(current_num)-1);
+                	$.each($('ul.question-item li'),function(index,item){
+                        var current_num = $(".current_page").text();
+                        if(index >= (current_page*current_num-5) && index < (current_page*current_num)){//如果索引值是在start和end之间的元素就显示，否则就隐
+                        $(this).show();
+                        }else{
+                            $(this).hide(); 
+                    }
+                });
+            }
             });
             progress.animate({
                 width: progress.width() - Math.round(progressWidth / questionLength)
@@ -283,7 +325,7 @@ function uploadCanceled(evt) {
         superContainer.find('.final').click(function(){
             $('#left-item').fadeOut(500);
             $('#finalresults li').fadeIn(500);
-            $('.results-container').css('width','95%');
+            $('.results-container').css('width','auto');
             
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
                 notice.fadeIn(300);
@@ -412,6 +454,7 @@ $(document).ready(function(){
     $(".current_page").text(current_num);//当前的页数
     //下一页
     $(".next_page").click(function(){
+        var current_num=$(".current_page").text();
         if(current_num==total_page){
             return false;//如果大于总页数就禁用下一页
         }else{
@@ -428,11 +471,16 @@ $(document).ready(function(){
         }
     });
     //上一页方法
+    
     $(".prev_page").click(function(){
+
+       var current_num=$(".current_page").text();
+       
         if(current_num==1){
             return false;
         }else{
             $(".current_page").text(--current_num);
+            
             $.each($('ul.question-item li'),function(index,item){
                 var start = current_page* (current_num-1);//起始范围
                 var end = current_page * current_num;//结束范围
@@ -445,4 +493,15 @@ $(document).ready(function(){
         }
                      
     })
+
+    window.addEventListener("resize", function () {
+        changeLeftitemHeight();
+    }, false);
+
+    changeLeftitemHeight();
+    
+        function changeLeftitemHeight() {
+            document.getElementById('left-item').style.height=$(window).height()+'px';
+        }
 })
+
