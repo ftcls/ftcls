@@ -248,7 +248,8 @@ function uploadCanceled(evt) {
         superContainer.find('.nav-start button').click(function() {
             $('#upload').fadeOut(500);
             $('body').css('background-color','#f3f3f3');
-            document.getElementById('left-item').style.height=$(window).height()+'px';
+            var leftitemheight=$(window).height()-30;
+            document.getElementById('left-item').style.height=leftitemheight+'px';
             $(this).parents('.slide-container').fadeOut(500,
             function() {
                 $(this).prev().fadeIn(500);
@@ -294,8 +295,6 @@ function uploadCanceled(evt) {
             return false;
         });
         superContainer.find('.prev').click(function() {
-
-        	
             notice.hide();
             $(this).parents('.slide-container').fadeOut(500,
             function() {
@@ -501,7 +500,8 @@ $(document).ready(function(){
     changeLeftitemHeight();
     
         function changeLeftitemHeight() {
-            document.getElementById('left-item').style.height=$(window).height()+'px';
+            leftitemheight=$(window).height()-30;
+            document.getElementById('left-item').style.height=leftitemheight+'px';
         }
 })
 
