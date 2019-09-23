@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container mt10">
+        <h1 class="title is-1 has-text-black">{% block title %}Not Implemented Yet{% endblock %}</h1>
+    {% if not g.user %}
+        <a class="action" href="{{ url_for('index') }}">Back</a>
+    {% else %}
+        <a class="action" href="{{ url_for('project.index') }}">Back</a>
+    {% endif %}
+    </div>
+{% endblock %}

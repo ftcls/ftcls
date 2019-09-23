@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+{#  <title>FTCls - A Fast Model Builder for Financial Text Classification</title>#}
+  <title>{% block title %}{% endblock %} - FTCls</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.1/bulma-divider/dist/css/bulma-divider.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.1/bulma-checkradio/dist/css/bulma-checkradio.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.1/bulma-tooltip/dist/css/bulma-tooltip.min.css" crossorigin="anonymous">
+{#  <link rel="stylesheet" href="{{ STATIC_PREFIX }}assets/css/forum.css">#}
+  {# TODO: Combine forum.css with style.css#}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- favicon settings -->
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ STATIC_PREFIX }}static/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ STATIC_PREFIX }}static/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_PREFIX }}static/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ STATIC_PREFIX }}static/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_PREFIX }}static/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{ STATIC_PREFIX }}static/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{ STATIC_PREFIX }}static/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ STATIC_PREFIX }}static/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ STATIC_PREFIX }}static/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="{{ STATIC_PREFIX }}static/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ STATIC_PREFIX }}static/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ STATIC_PREFIX }}static/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ STATIC_PREFIX }}static/favicon-16x16.png">
+  <link rel="manifest" href="{{ STATIC_PREFIX }}static/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="{{ STATIC_PREFIX }}static/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+{#  {% block header %}{% endblock %}#}
+</head>
+
+<body>
+  <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="index.html">
+<!--          TODO: REPLACE LOGO HERE -->
+{#          <img src="{{ STATIC_PREFIX }}assets/images/logo.png" width="32" height="32">#}
+          <b>FTCls</b>
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="topNav">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+        {% block navigation %}{% endblock %}
+      </div>
+      <div id="topNav" class="navbar-menu">
+        <div class="navbar-end">
+           {% if not g.user %}
+             <a class="navbar-item" href="{{ url_for('auth.login') }}">
+               <span>Login</span>
+             </a>
+             <a class="navbar-item" href="{{ url_for('auth.register') }}">
+               <span>Register</span>
+             </a>
+            {% else %}
+              <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                <span>Workflow</span>
+              </a>
+              <div class="navbar-dropdown">
+               <a href="dashboard" class="navbar-item" title="Statistics and control panels">
+                Dashboard
+               </a>
+               <a href="dataset" class="navbar-item" title="Managing data">
+                Data Keeper
+               </a>
+               <a href="annotate" class="navbar-item" title="Annotating data">
+                Annotator
+               </a>
+               <a href="model" class="navbar-item" title="All about models">
+                Model Tools
+               </a>
+               <a href="deploy" class="navbar-item" title="Deploy your output">
+                Deploy Man
+               </a>
+              </div>
+              </div>
+              <a class="navbar-item" href="{{ url_for('project.index') }}">
+               <span>Projects</span>
+              </a>
+              <a class="navbar-item" href="{{ url_for('auth.logout') }}">
+                <span>Logout</span>
+              </a>
+          </div>
+            {% endif %}
+        </div>
+      </div>
+  </nav>
+
+  <section class="content" style="margin-bottom:0;">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash container">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+  </section>
+{#  {% block content %}{% endblock %}#}
+  
+  {% block footer %}{% endblock %}
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});</script>
+</html>

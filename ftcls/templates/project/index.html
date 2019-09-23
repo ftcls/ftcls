@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container pl20 pr20 pt10 pb10">
+        <h1  class="title is-1 has-text-black">{% block title %}Projects{% endblock %}</h1>
+  {% if g.user %}
+    <a class="button is-alt is-normal mr5" href="{{ url_for('project.create') }}">New Project</a>
+    <a class="button is-alt is-normal mr5" href="{{ url_for('project.dataset') }}">Datasets</a>
+  {% endif %}
+    </div>
+{% endblock %}
+
+{% block content %}
+  {% for proj in projects %}
+      <div class="container pl20 pr20 pt20">
+        <article class="project">
+          <header>
+            <div>
+              <h3>{{ proj['title'] }}</h3>
+              <div class="about">{{ proj['description'] }} on {{ proj['created'].strftime('%H:%M %m/%d/%y') }}</div>
+            </div>
+              <a class="action mr10" href="{{ url_for('project.annotate', pid=proj['id']) }}">Annotate</a>
+            {% if g.user['id'] == proj['admin_uid'] %}
+              <a class="action mr10" href="{{ url_for('project.dataset', pid=proj['id']) }}">Manage Data</a>
+              <a class="action mr10" href="{{ url_for('project.edit', pid=proj['id']) }}">Edit</a>
+            {% endif %}
+          </header>
+      </div>
+    {#      <p class="body">{{ post['body'] }}</p>#}
+        </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container pl20 pr20 pt10">
+        <h1  class="title is-1 has-text-black padding">{% block title %}Register{% endblock %}</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container pl20 pr20">
+      <form method="post">
+        <label class="label" for="username">Username</label>
+        <input class="input is-primary mb5" name="username" id="username" required>
+        <label class="label" for="password">Password</label>
+        <input class="input is-primary" type="password" name="password" id="password" required>
+        <input class="button col-md-offset-4 is-medium is-primary" type="submit" value="Register">
+      </form>
+    </div>
+{% endblock %}
