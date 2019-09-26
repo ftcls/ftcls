@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from ftcls.db_sqlite import get_db
-
+# TODO: Add expiration to g.user_info.
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 

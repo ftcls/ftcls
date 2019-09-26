@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container pl20 pr20 pt10 pb10">
+        <h1  class="title is-1 has-text-black">{% block title %}DEBUG - All Projects{% endblock %}</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+  {% for proj in projects %}
+      <div class="container pl20 pr20 pt20">
+        <article class="project">
+          <header>
+            <div>
+                <h3>{{ proj['title'] }}</h3>
+              <div class="about">{{ proj['description'] }}</div>
+              <div class="about">Admin_id <b>{{ proj['admin_uid'] }}</b> created on {{ proj['created'].strftime('%H:%M %m/%d/%y') }}</div>
+              <div class="about">PID <b>{{ proj['id'] }}</b></div>
+            </div>
+          </header>
+        </article>
+      </div>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

@@ -16,18 +16,20 @@
         <article class="project">
           <header>
             <div>
-              <h3>{{ proj['title'] }}</h3>
-              <div class="about">{{ proj['description'] }} on {{ proj['created'].strftime('%H:%M %m/%d/%y') }}</div>
+                <h3><a href="{{ url_for('project.annotate', pid=proj['id']) }}">{{ proj['title'] }}</a></h3>
+              <div class="about">{{ proj['description'] }}</div>
+              <div class="about">Admin <b>{{ proj['username'] }}</b> created on {{ proj['created'].strftime('%H:%M %m/%d/%y') }}</div>
             </div>
+            {#  TODO: Move annotate to sub-proj page #}
               <a class="action mr10" href="{{ url_for('project.annotate', pid=proj['id']) }}">Annotate</a>
             {% if g.user['id'] == proj['admin_uid'] %}
-              <a class="action mr10" href="{{ url_for('project.dataset', pid=proj['id']) }}">Manage Data</a>
               <a class="action mr10" href="{{ url_for('project.edit', pid=proj['id']) }}">Edit</a>
+              <a class="action mr10" href="{{ url_for('project.dataset', pid=proj['id']) }}">Dataset</a>
+              <a class="action mr10" style="color: #e36d6d" href="{{ url_for('project.delete', pid=proj['id']) }}">Delete</a>
             {% endif %}
           </header>
-      </div>
-    {#      <p class="body">{{ post['body'] }}</p>#}
         </article>
+      </div>
     {% if not loop.last %}
       <hr>
     {% endif %}

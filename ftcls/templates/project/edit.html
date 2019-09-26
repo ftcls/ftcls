@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container pl20 pr20 pt10">
+        <h1  class="title is-1 has-text-black padding">{% block title %}Edit "{{ proj['title'] }}"{% endblock %}</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container pl20 pr20">
+        <form method="post">
+            <label for="title">Title</label>
+            <input class="input is-primary mb5" placeholder="Project title" name="title" id="title"
+                   value="{{ request.form['title'] or proj['title'] }}" required>
+            <label for="description">Description</label><br/>
+            <textarea class="textarea mb10" placeholder="Enter description for this project." name="description"
+                      id="description">{{ request.form['description'] or proj['description'] }}</textarea>
+            <input class="button is-primary mr10" type="submit" value="Save"/>
+            <a class="button is-danger" type="cancel" href="{{ url_for('project.index') }}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}
