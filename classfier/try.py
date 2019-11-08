@@ -5,7 +5,7 @@ def ev():
     text=input()
     toke=[]
     tagger= MeCab.Tagger('-Ochasen')
-    result=tagger.parseToNode(text)                   
+    result=tagger.parseToNode(text)                  
     while result:
         pos=result.feature.split(',')[0]
         pos2=result.feature.split(',')[1]
