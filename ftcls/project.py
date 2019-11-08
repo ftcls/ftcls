@@ -68,7 +68,8 @@ def create():
 @login_required
 def annotate(pid):
     flash("Merge .annotator here.", "info")
-    abort(501)
+    return render_template('project/annotate.html', anno_data={"data":500})
+    # abort(501)
 
 
 @bp.route('/dataset')
