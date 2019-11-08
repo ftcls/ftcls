@@ -22,8 +22,8 @@
             <div class="question-number">1/2</div>
             <div class="question"></div>
             <ul class="selection" style="margin: 0 auto;">
-                <li class="button is-info is-light nav-previous"><font color="red">✓</font> Yes</li>
-                <li class="button is-warning is-light nav-next"><font color="green">✓</font> No</li>
+                <li class="button is-info is-light nav-previous"><font color="#fffaf0">✓</font> Yes</li>
+                <li class="button is-warning is-light nav-next"><font color="green">×</font> No</li>
             </ul>
             <div class="nav-container">
                 <a class="button is-info is-light nav-previous" href="#">&lt; Prev</a>
@@ -36,11 +36,12 @@
 
 
 </div>
-<!-- <script>
-    anno_data= {{ anno_data|tojson }}
-        alert(anno_data["data"])
-    length = anno_data.length
+<script>
+    data = {{ data|tojson }}
+    alert(data["text"])
+    text = data["text"]
+    length = text.length
 </script>
-<script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}} "></script>
+<!-- <script type="text/javascript" src="{{url_for('static', filename='js/jquery.min.js')}} "></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/annotation.js')}} "></script> -->
 {% endblock %}

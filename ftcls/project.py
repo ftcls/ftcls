@@ -68,7 +68,9 @@ def create():
 @login_required
 def annotate(pid):
     flash("Merge .annotator here.", "info")
-    return render_template('project/annotate.html', anno_data={"data":500})
+    return render_template('project/annotate.html', data=
+                                                    {"text": ["占位文本", "日本語も", "カタカナ", "ひらがな", "Lorem Ipsum",
+                                                     "该项真命", "周会变需", "不知何出", "板啥是啥", "A1らB何cQu+=-"]})
     # abort(501)
 
 
