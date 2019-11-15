@@ -7,6 +7,7 @@ from ftcls.auth import login_required
 from ftcls.db_sqlite import get_db
 
 bp = Blueprint('project', __name__, url_prefix='/project')
+_CONFIG_PREFIX = '/instance/conf'
 
 
 def get_proj(pid, check_author=True):
@@ -121,3 +122,8 @@ def edit(pid):
 def delete():
     flash("Delete proj. Also removes related datasets or provide other options", "info")
     abort(501)
+
+
+class Project:
+    def __init__(self):
+        pass

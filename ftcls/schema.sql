@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS project;
 DROP TABLE IF EXISTS post;
 
 CREATE TABLE user (
@@ -23,6 +24,8 @@ CREATE TABLE project (
   admin_uid INTEGER NOT NULL,
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title TEXT NOT NULL,
+  project_type TEXT DEFAULT "Classification",
   description TEXT NOT NULL,
   FOREIGN KEY (admin_uid) REFERENCES user (id)
+--   configuration_file TEXT NOT NULL -- By default <pid>.json
 );

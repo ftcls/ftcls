@@ -1,0 +1,4 @@
+tinydb
+sqlite3
+
+Flask~=1.1.1

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div class="container pl20 pr20 pt10 pb10">
+        <h1  class="title is-1 has-text-black">{% block title %}Déвμढ - All Users{% endblock %}</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container pl20 pr20">
+  {% for u in users %}
+
+        <article class="project">
+          <header>
+            <div>
+                <h3>{{ u['username'] }}</h3>
+              <div class="about">ID: <b>{{ u['id'] }}</b> Password(hashed): <b>{{ u['password'] }}</b></div>
+            </div>
+          </header>
+        </article>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}
+  {% endfor %}
+        <div class="container pt20">
+            <a class="button" href="/debug/">Back to Portal</a>
+        </div>
+      </div>
+{% endblock %}
