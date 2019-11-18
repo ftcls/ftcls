@@ -1,4 +1,5 @@
 import pathlib
+from pathlib import Path
 import csv
 import json
 
@@ -13,9 +14,12 @@ import json
 #
 #
 
+# JSON.dump
+# PATH.makedirs(parents, exist_ok)
+
 
 class ProjectProfile:
-    def __init__(self):
+    def __init__(self, pid, path_prefix=Path("instance/project/")):
         pass
 
 
