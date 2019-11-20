@@ -1,3 +1,6 @@
+*{
+	box-sizing: unset;
+}
 body{
 	margin: 0;
 }
@@ -121,7 +124,7 @@ input[type="file" i]{
 }
 
 #slide-left-container{
-	
+	margin: 0 auto;
 	border-radius: 20px 20px 20px 20px;
 	padding:10px;
 	
@@ -143,7 +146,7 @@ input[type="file" i]{
 }
 .main-quiz-holder a{
 	text-decoration:none;
-	color:black;
+	color:white;
 	cursor: pointer;
 }
  .slide-container{
@@ -261,26 +264,16 @@ input[type="file" i]{
 }
 .main-quiz-holder .slide-container .prev,.main-quiz-holder .slide-container .next{
 	margin-top:30px;
-	height:19px;
+	
 	cursor:pointer;
 	text-align:center;
 	padding:5px 10px;
 	font-size:16px;
 	padding:5px 15px;
-	color:#4c4c4c;
+	color:white;
 	border-radius:4px;
 	border: 1px solid #dedede;
-	text-shadow:0 1px 0 rgba(255,255,255,0.3);
-	-webkit-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2),inset 0 0 6px 0 rgba(255,255,255,0.3),0 1px 2px rgba(0,0,0,0.4);
-	-moz-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2),inset 0 0 6px 0 rgba(255,255,255,0.3),0 1px 2px rgba(0,0,0,0.4);
-	box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2),inset 0 0 6px 0 rgba(255,255,255,0.3),0 1px 2px rgba(0,0,0,0.4);
-	background:#f6f6f6;
-	background:-webkit-gradient(linear,left top,left bottom,from(#f6f6f6),to(#d4d4d4));
-	background:-webkit-linear-gradient(#f6f6f6,#d4d4d4);
-	background-image:-moz-linear-gradient(top,#f6f6f6,#d4d4d4);
-	background-image:-moz-gradient(top,#f6f6f6,#d4d4d4);
-	border:1px solid #a1a1a1;
-	
+	background:#00d1b2;
 }
 .main-quiz-holder .slide-container .next{
 	
@@ -318,27 +311,23 @@ input[type="file" i]{
 	bottom:90px;
 }
 .main-quiz-holder .slide-container .prev{
-	width:70px;
+	width:auto;
 	float:left;
 }
 .main-quiz-holder .slide-container .next,.main-quiz-holder .slide-container .final{
-	width:70px;
+	width:auto;
 	float:right;
 }
 .main-quiz-holder .slide-container .final{
-	width:65px;
+
 	margin-top: 30px;
-	background: #77d125;
-    box-shadow: 0 1px 5px #3caa00, inset 0 10px 20px #c9ffb6;
-    -o-box-shadow: 5 1px 5px #3caa00,inset 0 10px 20px #c9ffb6;
-    -webkit-box-shadow: 0 1px 5px #3caa00, inset 0 10px 20px #c9ffb6;
-    -moz-box-shadow: 0 1px 5px #3caa00,inset 0 10px 20px #c9ffb6;
+	
+    
 }
 .main-quiz-holder .nav-previous{}
 .main-quiz-holder .nav-next{float:right;}
 .main-quiz-holder .nav-show-result{
-	padding-left:15px;
-	background:url(images/confirm.png) left no-repeat;
+	
 }
 
 .main-quiz-holder .nav-start{

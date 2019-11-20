@@ -54,7 +54,7 @@ $(function(){
             questionList += '<li class="questionlist" id="question'+questionsIteratorIndex+'"><span class="label"></span>'+ config.questions[questionsIteratorIndex].question + '</li>';
         }
 
-        superContainer.html('<div id="left-item"><ul id="slide-left-container" class="question-item">'+questionList+'</ul><div class="page_btn clear"><span class="page_box"><a class="prev_page">Prev</a><span class="num"><span class="current_page">1</span><span style="padding:0 3px;">/</span><span class="total"></span></span><a class="next_page">Next</a></span></div></div>'+contentFob+exitFob);
+        superContainer.html('<div id="left-item"><ul id="slide-left-container" class="question-item">'+questionList+'</ul><div class="page_btn clear"><span class="page_box"><a class="prev_page">Prev</a><span class="num"><span class="current_page">1</span><span style="padding:0 3px;">/</span><span class="total"></span></span><a class="next_page">Next</a></span></div></div>'+contentFob);
         
         var progress = superContainer.find('.progress'),
         progressKeeper = superContainer.find('.progress-keeper'),
@@ -93,29 +93,31 @@ $(function(){
                 thisLi.removeClass('selected');
                 //thisLi.removeClass('label1');
                 //thisLi.removeClass('label2');
-                $('#question'+(number-2)).removeClass("label1");
-                $('#question'+(number-2)).removeClass("label2");
+                $('#question'+(number-1)).removeClass("label1");
+                $('#question'+(number-1)).removeClass("label2");
             } else {
                 thisLi.parents('.answers').children('li').removeClass('selected');
                 thisLi.addClass('selected');
                 if($(this).index()==0){
+                    var lable=$(this).index();
+                    $.post(lable);
                     //thisLi.next().removeClass('label2');
                     //thisLi.addClass('label1');
                     //$('#question'+(number-2)).css('background','#fc5e5e');
-                    $('#question'+(number-2)).addClass('label1');
-                    $('#question'+(number-2)).removeClass("label2");
-                    $('#question'+(number-2)+' .label').html("Label__1,");
-                    $('#question'+(number-2)+' .label').addClass("label_1");
-                    $('#question'+(number-2)+' .label').removeClass("label_2");}
+                    $('#question'+(number-1)).addClass('label1');
+                    $('#question'+(number-1)).removeClass("label2");
+                    $('#question'+(number-1)+' .label').html("Label__1,");
+                    $('#question'+(number-1)+' .label').addClass("label_1");
+                    $('#question'+(number-1)+' .label').removeClass("label_2");}
                 else if($(this).index()==1){
                     //$('#question'+(number-2)).css('background','#c3e462');
                     //thisLi.prev().removeClass('label1');
                     //thisLi.addClass('label2');
-                    $('#question'+(number-2)).addClass('label2');
-                    $('#question'+(number-2)).removeClass("label1");
-                    $('#question'+(number-2)+' .label').html("Label__2,");
-                    $('#question'+(number-2)+' .label').addClass("label_2");
-                    $('#question'+(number-2)+' .label').removeClass("label_1");}
+                    $('#question'+(number-1)).addClass('label2');
+                    $('#question'+(number-1)).removeClass("label1");
+                    $('#question'+(number-1)+' .label').html("Label__2,");
+                    $('#question'+(number-1)+' .label').addClass("label_2");
+                    $('#question'+(number-1)+' .label').removeClass("label_1");}
             }
             
         });
@@ -152,7 +154,9 @@ $(function(){
                 $(this).next().fadeIn(500);
                 var current_page =5;
                 var current_num = $(".current_page").text();
-                if($(this).index()==(current_page*current_num+1)){
+                
+                if($(this).index()+1==(current_page*current_num+1)){
+                    
                 	$(".current_page").html(parseInt(current_num)+1);
 	                $.each($('ul.question-item li'),function(index,item){
 	                    if(index >= (current_page*current_num) && index < (current_page*current_num+5)){//如果索引值是在start和end之间的元素就显示，否则就隐
@@ -177,7 +181,7 @@ $(function(){
                 var current_page =5;
                 var current_num = $(".current_page").text();
 
-                if($(this).index()-2==(current_page*current_num-5)){
+                if($(this).index()-1==(current_page*current_num-5)){
                 	$(".current_page").html(parseInt(current_num)-1);
                 	$.each($('ul.question-item li'),function(index,item){
                         var current_num = $(".current_page").text();
@@ -367,16 +371,5 @@ $(document).ready(function(){
         }
                      
     })
-
-    window.addEventListener("resize", function () {
-        changeLeftitemHeight();
-    }, false);
-
-    changeLeftitemHeight();
-    
-        function changeLeftitemHeight() {
-            leftitemheight=$(window).height()-30;
-            document.getElementById('left-item').style.height=leftitemheight+'px';
-        }
 })
 

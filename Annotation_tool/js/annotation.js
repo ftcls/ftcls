@@ -224,6 +224,7 @@ function uploadCanceled(evt) {
                 thisLi.parents('.answers').children('li').removeClass('selected');
                 thisLi.addClass('selected');
                 if($(this).index()==0){
+                    alert("0");
                     //thisLi.next().removeClass('label2');
                     //thisLi.addClass('label1');
                     //$('#question'+(number-2)).css('background','#fc5e5e');
@@ -236,6 +237,7 @@ function uploadCanceled(evt) {
                     //$('#question'+(number-2)).css('background','#c3e462');
                     //thisLi.prev().removeClass('label1');
                     //thisLi.addClass('label2');
+                    alert("1");
                     $('#question'+(number-2)).addClass('label2');
                     $('#question'+(number-2)).removeClass("label1");
                     $('#question'+(number-2)+' .label').html("Label__2,");
