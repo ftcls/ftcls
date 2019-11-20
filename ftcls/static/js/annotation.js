@@ -375,10 +375,10 @@ $(document).ready(function(){
 
 $(".delete").click(function(){
 
-    $(".modal.is-active").css('display','none');
+    $("#import-data-modal").css('display','none');
                   
  })
 
  $("#import-data.button.is-alt.is-normal.mr5").click(function(){
-    $(".modal.is-active").css('display','flex');
+    $("#import-data-modal").css('display','flex');
  })
