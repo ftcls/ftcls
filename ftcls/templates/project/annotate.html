@@ -4,8 +4,8 @@
     <div class="container pl20 pr20 pt10 pb10">
         <h1  class="title is-1 has-text-black">{% block title %}Annotate{% endblock %}</h1>
   {% if g.user %}
-    <a class="button is-alt is-normal mr5" href="{{ url_for('project.create') }}">New Project</a>
-    <a class="button is-alt is-normal mr5" href="{{ url_for('project.dataset') }}">Datasets</a>
+    <a class="button is-alt is-normal mr5" href="{{ url_for('project.import_dataset', pid=pid) }}">Import Data</a>
+    <a class="button is-alt is-normal mr5" href="{{ url_for('project.todo') }}">Manage Data</a>
   {% endif %}
     </div>
 {% endblock %}
