@@ -4,14 +4,36 @@
     <div class="container pl20 pr20 pt10 pb10">
         <h1  class="title is-1 has-text-black">{% block title %}Annotate{% endblock %}</h1>
   {% if g.user %}
-    <a class="button is-alt is-normal mr5" href="{{ url_for('project.import_dataset', pid=pid) }}">Import Data</a>
-    <a class="button is-alt is-normal mr5" href="{{ url_for('project.todo') }}">Manage Data</a>
+    <a id="import-data" class="button is-alt is-normal mr5">Import Data</a>
+    <a id="manage-data" class="button is-alt is-normal mr5" href="{{ url_for('project.todo') }}">Manage Data</a>
   {% endif %}
     </div>
 {% endblock %}
 
 {% block content %}
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/anno-style.css') }}">
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title"  style="margin-bottom:0;">Import Dataset</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="control">
+            <label class="radio">
+              <input type="radio" name="foobar" checked>
+              CSV
+            </label>
+            <label class="radio">
+              <input type="radio" name="foobar" disabled>
+              Json
+            </label>
+          </div>
+      </section>
+      
+    </div>
+  </div>
 <div id='quiz-container' class="main-quiz-holder container"></div>
 <script>
     data = {{ data|tojson }}
